@@ -12,44 +12,46 @@
                 </tr>
                 <tr>
                     <td>
-                        <!--<img src="{{ asset('img/ahmed_chergizov.jpg') }}" alt="">-->
-                        <!--<div class="status status-waiting">Ч. Ахмед</div>-->
+                        <desk :user="userByPosition(2)"></desk>
                     </td>
                     <td>
-                        <!--<img src="{{ asset('img/placeholder.jpg') }}" alt="">-->
-                        <!--<div class="status status-waiting">Яхья</div>-->
+                        <desk :user="userByPosition(5)"></desk>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <!--<img src="{{ asset('img/khavazh_archakov.jpg') }}" alt="">-->
-                        <!--<div class="status status-waiting">А. Хаваж</div>-->
+                        <desk :user="userByPosition(3)"></desk>
                     </td>
-                    <td>Свободно</td>
+                    <td>
+                        <desk :user="userByPosition(6)"></desk>
+                    </td>
                 </tr>
             </table>
         </div>
         <div class="col-6 text-center">
             <table>
                 <tr>
-                    <td>Свободно</td>
                     <td>
-                        <!--<img src="{{ asset('img/berd_aziev.jpg') }}" alt="">-->
-                        <!--<div class="status status-payed">А. Берд</div>-->
+                        <desk :user="userByPosition(7)"></desk>
+                    </td>
+                    <td>
+                        <desk :user="userByPosition(10)"></desk>
                     </td>
                 </tr>
                 <tr>
-                    <td>Свободно</td>
                     <td>
-                        <!--<img src="{{ asset('img/mikail_aziev.jpg') }}" alt="">-->
-                        <!--<div class="status status-waiting">А. Микаил</div>-->
+                        <desk :user="userByPosition(8)"></desk>
+                    </td>
+                    <td>
+                        <desk :user="userByPosition(11)"></desk>
                     </td>
                 </tr>
                 <tr>
-                    <td>Свободно</td>
                     <td>
-                        <!--<img src="{{ asset('img/placeholder.jpg') }}" alt="">-->
-                        <!--<div class="status status-waiting">Д. Абдулла</div>-->
+                        <desk :user="userByPosition(9)"></desk>
+                    </td>
+                    <td>
+                        <desk :user="userByPosition(12)"></desk>
                     </td>
                 </tr>
             </table>
@@ -61,17 +63,7 @@
     export default {
         data() {
             return {
-                users: [{
-                    name: 'А. Ибрагим',
-                    avatar: 'img/ibragim_aziev.jpg',
-                    position: 1,
-                    payed: true,
-                }, {
-                    name: 'Т. Ахмед',
-                    avatar: 'img/ahmed_timurziev.jpg',
-                    position: 4,
-                    payed: false,
-                }],
+                users: [],
             };
         },
         methods: {
@@ -79,5 +71,12 @@
                 return _.find(this.users, u => u.position === position);
             },
         },
+        mounted() {
+            if (!this.users.length) {
+                axios.get('api/users').then(response => {
+                    this.users = response.data;
+                });
+            }
+        }
     }
 </script>

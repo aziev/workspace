@@ -1,15 +1,15 @@
 <template>
     <div>
-        <img :src="user.avatar" alt="">
-        <div class="status" :class="user.payed ? 'status-payed' : 'status-waiting'">{{ user.name }}</div>
+        <div v-if="user">
+            <img :src="user.avatar ? user.avatar : 'img/placeholder.jpg'" alt="">
+            <div class="status" :class="user.payed ? 'status-payed' : 'status-waiting'">{{ user.name }}</div>
+        </div>
+        <div v-else>Свободно</div>
     </div>
 </template>
 
 <script>
     export default {
         props: ['user'],
-        mounted() {
-            console.log('Component mounted.')
-        }
     }
 </script>

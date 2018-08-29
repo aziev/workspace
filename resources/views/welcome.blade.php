@@ -53,7 +53,6 @@
 </head>
 <body>
     <div class="container" id="app">
-        <h1 class="">Сентябрь</h1>
         <office></office>
     </div>
     <script src="{{ asset('js/app.js') }}"></script>

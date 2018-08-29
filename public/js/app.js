@@ -33027,12 +33027,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user'],
-    mounted: function mounted() {
-        console.log('Component mounted.');
-    }
+    props: ['user']
 });
 
 /***/ }),
@@ -33044,16 +33044,25 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("img", { attrs: { src: _vm.user.avatar, alt: "" } }),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "status",
-        class: _vm.user.payed ? "status-payed" : "status-waiting"
-      },
-      [_vm._v(_vm._s(_vm.user.name))]
-    )
+    _vm.user
+      ? _c("div", [
+          _c("img", {
+            attrs: {
+              src: _vm.user.avatar ? _vm.user.avatar : "img/placeholder.jpg",
+              alt: ""
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "status",
+              class: _vm.user.payed ? "status-payed" : "status-waiting"
+            },
+            [_vm._v(_vm._s(_vm.user.name))]
+          )
+        ])
+      : _c("div", [_vm._v("Свободно")])
   ])
 }
 var staticRenderFns = []
@@ -33188,21 +33197,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            users: [{
-                name: 'А. Ибрагим',
-                avatar: 'img/ibragim_aziev.jpg',
-                position: 1,
-                payed: true
-            }, {
-                name: 'Т. Ахмед',
-                avatar: 'img/ahmed_timurziev.jpg',
-                position: 4,
-                payed: false
-            }]
+            users: []
         };
     },
 
@@ -33210,6 +33211,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         userByPosition: function userByPosition(position) {
             return _.find(this.users, function (u) {
                 return u.position === position;
+            });
+        }
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        if (!this.users.length) {
+            axios.get('api/users').then(function (response) {
+                _this.users = response.data;
             });
         }
     }
@@ -33232,43 +33242,44 @@ var render = function() {
           _c("td", [_c("desk", { attrs: { user: _vm.userByPosition(4) } })], 1)
         ]),
         _vm._v(" "),
-        _vm._m(0),
+        _c("tr", [
+          _c("td", [_c("desk", { attrs: { user: _vm.userByPosition(2) } })], 1),
+          _vm._v(" "),
+          _c("td", [_c("desk", { attrs: { user: _vm.userByPosition(5) } })], 1)
+        ]),
         _vm._v(" "),
-        _vm._m(1)
+        _c("tr", [
+          _c("td", [_c("desk", { attrs: { user: _vm.userByPosition(3) } })], 1),
+          _vm._v(" "),
+          _c("td", [_c("desk", { attrs: { user: _vm.userByPosition(6) } })], 1)
+        ])
       ])
     ]),
     _vm._v(" "),
-    _vm._m(2)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [_c("td"), _vm._v(" "), _c("td")])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [_c("td"), _vm._v(" "), _c("td", [_vm._v("Свободно")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 text-center" }, [
+    _c("div", { staticClass: "col-6 text-center" }, [
       _c("table", [
-        _c("tr", [_c("td", [_vm._v("Свободно")]), _vm._v(" "), _c("td")]),
+        _c("tr", [
+          _c("td", [_c("desk", { attrs: { user: _vm.userByPosition(7) } })], 1),
+          _vm._v(" "),
+          _c("td", [_c("desk", { attrs: { user: _vm.userByPosition(10) } })], 1)
+        ]),
         _vm._v(" "),
-        _c("tr", [_c("td", [_vm._v("Свободно")]), _vm._v(" "), _c("td")]),
+        _c("tr", [
+          _c("td", [_c("desk", { attrs: { user: _vm.userByPosition(8) } })], 1),
+          _vm._v(" "),
+          _c("td", [_c("desk", { attrs: { user: _vm.userByPosition(11) } })], 1)
+        ]),
         _vm._v(" "),
-        _c("tr", [_c("td", [_vm._v("Свободно")]), _vm._v(" "), _c("td")])
+        _c("tr", [
+          _c("td", [_c("desk", { attrs: { user: _vm.userByPosition(9) } })], 1),
+          _vm._v(" "),
+          _c("td", [_c("desk", { attrs: { user: _vm.userByPosition(12) } })], 1)
+        ])
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
