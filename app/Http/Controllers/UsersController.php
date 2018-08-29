@@ -69,7 +69,11 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $result = User::whereId($id)->update([
+            'payed' => $request['status'],
+        ]);
+
+        return response()->json($result);
     }
 
     /**

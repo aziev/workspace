@@ -17,4 +17,4 @@
 //    return $request->user();
 //});
 
-Route::get('users', 'UsersController@index');
+Route::resource('users', 'UsersController');

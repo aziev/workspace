@@ -19,5 +19,15 @@ Vue.component('desk', require('./components/Desk.vue'));
 Vue.component('office', require('./components/Office.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data: {
+        user: null,
+    },
+    created() {
+        if (!this.user) {
+            axios.get('user').then(response => {
+                this.user = response.data;
+            });
+        }
+    },
 });

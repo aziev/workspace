@@ -1,57 +1,11 @@
 <template>
     <div class="row justify-content-center">
-        <div class="col-6 text-center">
+        <div class="col-6 text-center" v-for="table_index in 2">
             <table>
-                <tr>
-                    <td>
-                        <desk :user="userByPosition(1)"></desk>
-                    </td>
-                    <td>
-                        <desk :user="userByPosition(4)"></desk>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <desk :user="userByPosition(2)"></desk>
-                    </td>
-                    <td>
-                        <desk :user="userByPosition(5)"></desk>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <desk :user="userByPosition(3)"></desk>
-                    </td>
-                    <td>
-                        <desk :user="userByPosition(6)"></desk>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="col-6 text-center">
-            <table>
-                <tr>
-                    <td>
-                        <desk :user="userByPosition(7)"></desk>
-                    </td>
-                    <td>
-                        <desk :user="userByPosition(10)"></desk>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <desk :user="userByPosition(8)"></desk>
-                    </td>
-                    <td>
-                        <desk :user="userByPosition(11)"></desk>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <desk :user="userByPosition(9)"></desk>
-                    </td>
-                    <td>
-                        <desk :user="userByPosition(12)"></desk>
+                <tr v-for="row_index in 3">
+                    <td v-for="cell_index in 2">
+                        <desk :user="userByPosition(row_index + (3 * (cell_index-1)) + (6 * (table_index-1)))"
+                              @userPaymentStatusChanged="updateUser"></desk>
                     </td>
                 </tr>
             </table>
@@ -61,6 +15,7 @@
 
 <script>
     export default {
+        props: ['auth_user'],
         data() {
             return {
                 users: [],
@@ -70,13 +25,18 @@
             userByPosition(position) {
                 return _.find(this.users, u => u.position === position);
             },
+            updateUser(event) {
+                let user = _.find(this.users, u => u.id === event.user_id);
+                user.payed = event.payed;
+            },
         },
-        mounted() {
+        created() {
             if (!this.users.length) {
                 axios.get('api/users').then(response => {
                     this.users = response.data;
                 });
             }
-        }
+        },
+
     }
 </script>

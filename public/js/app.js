@@ -995,7 +995,19 @@ Vue.component('desk', __webpack_require__(37));
 Vue.component('office', __webpack_require__(46));
 
 var app = new Vue({
-  el: '#app'
+    el: '#app',
+    data: {
+        user: null
+    },
+    created: function created() {
+        var _this = this;
+
+        if (!this.user) {
+            axios.get('user').then(function (response) {
+                _this.user = response.data;
+            });
+        }
+    }
 });
 
 /***/ }),
@@ -33030,9 +33042,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user']
+    props: ['user'],
+    computed: {
+        auth_user: function auth_user() {
+            return this.$root._data.user;
+        }
+    },
+    methods: {
+        changePaymentStatus: function changePaymentStatus(status) {
+            var _this = this;
+
+            axios.put('api/users/' + this.user.id, {
+                status: status
+            }).then(function (response) {
+                _this.$emit('userPaymentStatusChanged', {
+                    user_id: _this.user.id,
+                    payed: status
+                });
+            });
+        }
+    }
 });
 
 /***/ }),
@@ -33067,7 +33104,37 @@ var render = function() {
               [_vm._v(_vm._s(_vm.user.name))]
             )
           ])
-        : _c("div", [_vm._v("Свободно")])
+        : _c("div", [_vm._v("Свободно")]),
+      _vm._v(" "),
+      _vm.auth_user && _vm.auth_user.is_admin && _vm.user
+        ? _c("div", [
+            _vm.user.payed
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "action-button btn btn-danger",
+                    on: {
+                      click: function($event) {
+                        _vm.changePaymentStatus(false)
+                      }
+                    }
+                  },
+                  [_vm._v("×")]
+                )
+              : _c(
+                  "button",
+                  {
+                    staticClass: "action-button btn btn-success",
+                    on: {
+                      click: function($event) {
+                        _vm.changePaymentStatus(true)
+                      }
+                    }
+                  },
+                  [_vm._v("✓")]
+                )
+          ])
+        : _vm._e()
     ]
   )
 }
@@ -33159,54 +33226,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['auth_user'],
     data: function data() {
         return {
             users: []
@@ -33218,9 +33240,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return _.find(this.users, function (u) {
                 return u.position === position;
             });
+        },
+        updateUser: function updateUser(event) {
+            var user = _.find(this.users, function (u) {
+                return u.id === event.user_id;
+            });
+            user.payed = event.payed;
         }
     },
-    mounted: function mounted() {
+    created: function created() {
         var _this = this;
 
         if (!this.users.length) {
@@ -33239,51 +33267,40 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row justify-content-center" }, [
-    _c("div", { staticClass: "col-6 text-center" }, [
-      _c("table", [
-        _c("tr", [
-          _c("td", [_c("desk", { attrs: { user: _vm.userByPosition(1) } })], 1),
-          _vm._v(" "),
-          _c("td", [_c("desk", { attrs: { user: _vm.userByPosition(4) } })], 1)
-        ]),
-        _vm._v(" "),
-        _c("tr", [
-          _c("td", [_c("desk", { attrs: { user: _vm.userByPosition(2) } })], 1),
-          _vm._v(" "),
-          _c("td", [_c("desk", { attrs: { user: _vm.userByPosition(5) } })], 1)
-        ]),
-        _vm._v(" "),
-        _c("tr", [
-          _c("td", [_c("desk", { attrs: { user: _vm.userByPosition(3) } })], 1),
-          _vm._v(" "),
-          _c("td", [_c("desk", { attrs: { user: _vm.userByPosition(6) } })], 1)
-        ])
+  return _c(
+    "div",
+    { staticClass: "row justify-content-center" },
+    _vm._l(2, function(table_index) {
+      return _c("div", { staticClass: "col-6 text-center" }, [
+        _c(
+          "table",
+          _vm._l(3, function(row_index) {
+            return _c(
+              "tr",
+              _vm._l(2, function(cell_index) {
+                return _c(
+                  "td",
+                  [
+                    _c("desk", {
+                      attrs: {
+                        user: _vm.userByPosition(
+                          row_index +
+                            3 * (cell_index - 1) +
+                            6 * (table_index - 1)
+                        )
+                      },
+                      on: { userPaymentStatusChanged: _vm.updateUser }
+                    })
+                  ],
+                  1
+                )
+              })
+            )
+          })
+        )
       ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-6 text-center" }, [
-      _c("table", [
-        _c("tr", [
-          _c("td", [_c("desk", { attrs: { user: _vm.userByPosition(7) } })], 1),
-          _vm._v(" "),
-          _c("td", [_c("desk", { attrs: { user: _vm.userByPosition(10) } })], 1)
-        ]),
-        _vm._v(" "),
-        _c("tr", [
-          _c("td", [_c("desk", { attrs: { user: _vm.userByPosition(8) } })], 1),
-          _vm._v(" "),
-          _c("td", [_c("desk", { attrs: { user: _vm.userByPosition(11) } })], 1)
-        ]),
-        _vm._v(" "),
-        _c("tr", [
-          _c("td", [_c("desk", { attrs: { user: _vm.userByPosition(9) } })], 1),
-          _vm._v(" "),
-          _c("td", [_c("desk", { attrs: { user: _vm.userByPosition(12) } })], 1)
-        ])
-      ])
-    ])
-  ])
+    })
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

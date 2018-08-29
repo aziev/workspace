@@ -11,7 +11,7 @@
 </head>
 <body>
     <div id="app" class="container">
-        <office></office>
+        <office :auth_user="user"></office>
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>

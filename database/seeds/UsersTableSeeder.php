@@ -23,6 +23,7 @@ class UsersTableSeeder extends Seeder
             'position' => 1,
             'payed' => true,
             'password' => $password,
+            'is_admin' => true,
         ], [
             'email' => null,
             'name' => 'Ч. Ахмед',
@@ -30,6 +31,7 @@ class UsersTableSeeder extends Seeder
             'position' => 2,
             'payed' => false,
             'password' => $password,
+            'is_admin' => false,
         ], [
             'email' => null,
             'name' => 'А. Хаваж',
@@ -37,6 +39,7 @@ class UsersTableSeeder extends Seeder
             'position' => 3,
             'payed' => false,
             'password' => $password,
+            'is_admin' => false,
         ], [
             'email' => null,
             'name' => 'Т. Ахмед',
@@ -44,6 +47,7 @@ class UsersTableSeeder extends Seeder
             'position' => 4,
             'payed' => false,
             'password' => $password,
+            'is_admin' => false,
         ], [
             'email' => null,
             'name' => 'Т. Яхья',
@@ -51,6 +55,7 @@ class UsersTableSeeder extends Seeder
             'position' => 5,
             'payed' => false,
             'password' => $password,
+            'is_admin' => false,
         ], [
             'email' => null,
             'name' => 'А. Берд',
@@ -58,6 +63,7 @@ class UsersTableSeeder extends Seeder
             'position' => 10,
             'payed' => true,
             'password' => $password,
+            'is_admin' => false,
         ], [
             'email' => null,
             'name' => 'А. Микаил',
@@ -65,6 +71,7 @@ class UsersTableSeeder extends Seeder
             'position' => 11,
             'payed' => false,
             'password' => $password,
+            'is_admin' => false,
         ], [
             'email' => null,
             'name' => 'Д. Абдулла',
@@ -72,6 +79,7 @@ class UsersTableSeeder extends Seeder
             'position' => 12,
             'payed' => false,
             'password' => $password,
+            'is_admin' => false,
         ]]);
     }
 }

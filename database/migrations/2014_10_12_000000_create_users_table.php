@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('avatar');
             $table->integer('position');
             $table->boolean('payed')->default(false);
+            $table->boolean('is_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
