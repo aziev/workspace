@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Workspace</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <style>
@@ -51,66 +52,10 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="app">
         <h1 class="">Сентябрь</h1>
-        <div class="row justify-content-center">
-            <div class="col-6 text-center">
-                <table>
-                    <tr>
-                        <td>
-                            <img src="{{ asset('img/ibragim_aziev.jpg') }}" alt="">
-                            <div class="status status-payed">А. Ибрагим</div>
-                        </td>
-                        <td>
-                            <img src="{{ asset('img/ahmed_timurziev.jpg') }}" alt="">
-                            <div class="status status-waiting">Т. Ахмед</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="{{ asset('img/ahmed_chergizov.jpg') }}" alt="">
-                            <div class="status status-waiting">Ч. Ахмед</div>
-                        </td>
-                        <td>
-                            <img src="{{ asset('img/placeholder.jpg') }}" alt="">
-                            <div class="status status-waiting">Яхья</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="{{ asset('img/khavazh_archakov.jpg') }}" alt="">
-                            <div class="status status-waiting">А. Хаваж</div>
-                        </td>
-                        <td>Свободно</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-6 text-center">
-                <table>
-                    <tr>
-                        <td>Свободно</td>
-                        <td>
-                            <img src="{{ asset('img/berd_aziev.jpg') }}" alt="">
-                            <div class="status status-payed">А. Берд</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Свободно</td>
-                        <td>
-                            <img src="{{ asset('img/mikail_aziev.jpg') }}" alt="">
-                            <div class="status status-waiting">А. Микаил</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Свободно</td>
-                        <td>
-                            <img src="{{ asset('img/placeholder.jpg') }}" alt="">
-                            <div class="status status-waiting">Д. Абдулла</div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+        <office></office>
     </div>
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
