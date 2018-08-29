@@ -33043,27 +33043,33 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.user
-      ? _c("div", [
-          _c("img", {
-            attrs: {
-              src: _vm.user.avatar ? _vm.user.avatar : "img/placeholder.jpg",
-              alt: ""
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "status",
-              class: _vm.user.payed ? "status-payed" : "status-waiting"
-            },
-            [_vm._v(_vm._s(_vm.user.name))]
-          )
-        ])
-      : _c("div", [_vm._v("Свободно")])
-  ])
+  return _c(
+    "div",
+    { staticClass: "desk align-items-center justify-content-center" },
+    [
+      _vm.user
+        ? _c("div", [
+            _c("img", {
+              attrs: {
+                src: _vm.user.avatar ? _vm.user.avatar : "img/placeholder.jpg",
+                alt: ""
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "status-bar",
+                class: _vm.user.payed
+                  ? "status-bar--payed"
+                  : "status-bar--waiting"
+              },
+              [_vm._v(_vm._s(_vm.user.name))]
+            )
+          ])
+        : _c("div", [_vm._v("Свободно")])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
