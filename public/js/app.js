@@ -33097,44 +33097,22 @@ var render = function() {
               "div",
               {
                 staticClass: "status-bar",
-                class: _vm.user.payed
-                  ? "status-bar--payed"
-                  : "status-bar--waiting"
+                class: {
+                  "status-bar--clickable":
+                    _vm.auth_user && _vm.auth_user.is_admin,
+                  "status-bar--payed": _vm.user.payed,
+                  "status-bar--waiting": !_vm.user.payed
+                },
+                on: {
+                  click: function($event) {
+                    _vm.changePaymentStatus(!_vm.user.payed)
+                  }
+                }
               },
               [_vm._v(_vm._s(_vm.user.name))]
             )
           ])
-        : _c("div", [_vm._v("Свободно")]),
-      _vm._v(" "),
-      _vm.auth_user && _vm.auth_user.is_admin && _vm.user
-        ? _c("div", [
-            _vm.user.payed
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "action-button btn btn-danger",
-                    on: {
-                      click: function($event) {
-                        _vm.changePaymentStatus(false)
-                      }
-                    }
-                  },
-                  [_vm._v("×")]
-                )
-              : _c(
-                  "button",
-                  {
-                    staticClass: "action-button btn btn-success",
-                    on: {
-                      click: function($event) {
-                        _vm.changePaymentStatus(true)
-                      }
-                    }
-                  },
-                  [_vm._v("✓")]
-                )
-          ])
-        : _vm._e()
+        : _c("div", [_vm._v("Свободно")])
     ]
   )
 }

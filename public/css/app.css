@@ -10524,11 +10524,7 @@ td {
   background: #bf7c00;
 }
 
-.action-button {
-  position: absolute;
-  right: 4px;
-  top: 4px;
-  padding: 2px 6px;
-  line-height: 20px;
+.status-bar--clickable {
+  cursor: pointer;
 }
 
