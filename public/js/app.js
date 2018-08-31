@@ -50224,6 +50224,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['auth_user'],
@@ -50254,6 +50267,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.users = response.data;
             });
         }
+    },
+
+    computed: {
+        unassigned_users: function unassigned_users() {
+            return _.filter(this.users, function (u) {
+                return !u.position;
+            });
+        }
     }
 });
 
@@ -50267,40 +50288,76 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "row justify-content-center" },
-    _vm._l(2, function(table_index) {
-      return _c("div", { staticClass: "col-6 text-center" }, [
-        _c(
-          "table",
-          _vm._l(3, function(row_index) {
-            return _c(
-              "tr",
-              _vm._l(2, function(cell_index) {
+    [
+      _c(
+        "div",
+        { staticClass: "row justify-content-center mb-4" },
+        _vm._l(2, function(table_index) {
+          return _c("div", { staticClass: "col-6 text-center" }, [
+            _c(
+              "table",
+              _vm._l(3, function(row_index) {
                 return _c(
-                  "td",
-                  [
-                    _c("desk", {
-                      attrs: {
-                        user: _vm.userByPosition(
-                          row_index +
-                            3 * (cell_index - 1) +
-                            6 * (table_index - 1)
-                        )
-                      },
-                      on: { userPaymentStatusChanged: _vm.updateUser }
-                    })
-                  ],
-                  1
+                  "tr",
+                  _vm._l(2, function(cell_index) {
+                    return _c(
+                      "td",
+                      [
+                        _c("desk", {
+                          attrs: {
+                            user: _vm.userByPosition(
+                              row_index +
+                                3 * (cell_index - 1) +
+                                6 * (table_index - 1)
+                            )
+                          },
+                          on: { userPaymentStatusChanged: _vm.updateUser }
+                        })
+                      ],
+                      1
+                    )
+                  })
                 )
               })
             )
-          })
-        )
-      ])
-    })
+          ])
+        })
+      ),
+      _vm._v(" "),
+      _vm.unassigned_users.length
+        ? [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "row justify-content-start" },
+              _vm._l(_vm.unassigned_users, function(user) {
+                return _c("div", { staticClass: "unassigned-user mr-3" }, [
+                  _c("img", {
+                    attrs: {
+                      src: user.avatar ? user.avatar : "img/placeholder.jpg",
+                      alt: ""
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("span", [_vm._v(_vm._s(user.name))])
+                ])
+              })
+            )
+          ]
+        : _vm._e()
+    ],
+    2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [_c("h4", [_vm._v("За бортом:")])])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

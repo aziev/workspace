@@ -10546,3 +10546,11 @@ td {
   line-height: 20px;
 }
 
+.unassigned-user img {
+  display: block;
+  width: 50px;
+  margin: 0 auto;
+  border: 3px solid #ebebeb;
+  border-radius: 50px;
+}
+
