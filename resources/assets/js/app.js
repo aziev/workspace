@@ -23,11 +23,13 @@ Vue.component('office', require('./components/Office.vue'));
 
 import Main from './pages/Main.vue';
 import Login from './pages/Login.vue';
+import Logout from './pages/Logout.vue';
 
 const router = new VueRouter({
     routes: [
         {path: '/', component: Main},
         {path: '/login', component: Login},
+        {path: '/logout', component: Logout},
     ]
 });
 
@@ -57,7 +59,15 @@ const app = new Vue({
             console.log(event);
             localStorage.setItem('api_token', event.token);
             this.user = event.user;
-        }
+        },
+        logout() {
+            if (this.user) {
+                axios.post('api/auth/logout').then(response => {
+                    this.user = null;
+                    localStorage.removeItem('api_token');
+                });
+            }
+        },
     },
     router,
 });

@@ -10471,10 +10471,6 @@ a.text-dark:focus {
   }
 }
 
-body {
-  padding: 50px 0;
-}
-
 table {
   display: inline-block;
   margin: 0 100px;
@@ -10526,5 +10522,11 @@ td {
 
 .status-bar--clickable {
   cursor: pointer;
+}
+
+.header {
+  border-bottom: 1px solid #ebebeb;
+  padding: 16px 0;
+  margin-bottom: 50px;
 }
 

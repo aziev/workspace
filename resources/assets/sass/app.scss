@@ -8,17 +8,14 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-body {
-  padding: 50px 0;
-}
 table {
   display: inline-block;
   margin: 0 100px;
 }
+
 td {
   border: 3px solid #fff;
 }
-
 
 .desk {
   display: flex;
@@ -58,10 +55,8 @@ td {
   cursor: pointer;
 }
 
-//.action-button {
-//  position: absolute;
-//  right: 4px;
-//  top: 4px;
-//  padding: 2px 6px;
-//  line-height: 20px;
-//}
+.header {
+  border-bottom: 1px solid #ebebeb;
+  padding: 16px 0;
+  margin-bottom: 50px;
+}

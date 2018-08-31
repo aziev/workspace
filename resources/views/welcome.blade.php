@@ -10,9 +10,20 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
-    <div id="app">
-        <router-view @logged-in="saveUserInfo"></router-view>
-    </div>
+    @verbatim
+        <div id="app">
+            <div class="header">
+                <div class="container" >
+                    <div class="row justify-content-end">
+                        <span v-if="user" class="mr-2">Привет, {{ user.name }}</span>
+                        <a href="" v-if="user" @click.prevent="logout">Выйти</a>
+                        <router-link v-else to="login">Войти</router-link>
+                    </div>
+                </div>
+            </div>
+            <router-view @logged-in="saveUserInfo"></router-view>
+        </div>
+    @endverbatim
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
