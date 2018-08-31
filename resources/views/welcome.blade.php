@@ -14,10 +14,13 @@
         <div id="app">
             <div class="header">
                 <div class="container" >
-                    <div class="row justify-content-end">
-                        <span v-if="user" class="mr-2">Привет, {{ user.name }}</span>
-                        <a href="" v-if="user" @click.prevent="logout">Выйти</a>
-                        <router-link v-else to="login">Войти</router-link>
+                    <div class="row justify-content-between">
+                        <div>Solvo Workspace</div>
+                        <div>
+                            <span v-if="user" class="mr-2">Привет, {{ user.name }}</span>
+                            <a href="" v-if="user" @click.prevent="logout">Выйти</a>
+                            <router-link v-else to="login">Войти</router-link>
+                        </div>
                     </div>
                 </div>
             </div>
