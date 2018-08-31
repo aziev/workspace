@@ -14060,8 +14060,8 @@ var app = new Vue({
 
     methods: {
         saveUserInfo: function saveUserInfo(event) {
-            console.log(event);
             localStorage.setItem('api_token', event.token);
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + event.token;
             this.user = event.user;
         },
         logout: function logout() {
