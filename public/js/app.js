@@ -50054,6 +50054,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['user'],
@@ -50080,11 +50081,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         removeUserFromDesk: function removeUserFromDesk(user_id) {
             var _this2 = this;
 
-            axios.put('api/users/' + this.user.id, {
-                position: null
-            }).then(function (response) {
-                _this2.user.position = null;
-            });
+            if (this.auth_user && this.auth_user.is_admin) {
+                axios.put('api/users/' + this.user.id, {
+                    position: null
+                }).then(function (response) {
+                    _this2.user.position = null;
+                });
+            }
         }
     }
 });
@@ -50129,18 +50132,20 @@ var render = function() {
               [_vm._v(_vm._s(_vm.user.name))]
             ),
             _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-danger action-button",
-                on: {
-                  click: function($event) {
-                    _vm.removeUserFromDesk(_vm.user.id)
-                  }
-                }
-              },
-              [_vm._v("X")]
-            )
+            _vm.auth_user && _vm.auth_user.is_admin
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger action-button",
+                    on: {
+                      click: function($event) {
+                        _vm.removeUserFromDesk(_vm.user.id)
+                      }
+                    }
+                  },
+                  [_vm._v("X")]
+                )
+              : _vm._e()
           ])
         : _c("div", [_vm._v("Свободно")])
     ]
