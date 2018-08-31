@@ -43,11 +43,13 @@ td {
     .action-button {
       visibility: visible;
     }
-    .free-btn {
-      display: block;
-    }
-    .free-text {
-      display: none;
+    .show-add-btn-on-hover {
+      .free-btn {
+        display: block;
+      }
+      .free-text {
+        display: none;
+      }
     }
   }
 }

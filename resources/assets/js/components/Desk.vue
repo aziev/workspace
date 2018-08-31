@@ -12,7 +12,7 @@
             <button v-if="auth_user && auth_user.is_admin"
                     class="btn btn-danger action-button" @click="removeUserFromDesk(user.id)">X</button>
         </div>
-        <div v-else>
+        <div v-else :class="auth_user && auth_user.is_admin ? 'show-add-btn-on-hover' : ''">
             <div class="free-text">
                 Свободно
             </div>

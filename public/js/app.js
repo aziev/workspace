@@ -50152,24 +50152,33 @@ var render = function() {
                 )
               : _vm._e()
           ])
-        : _c("div", [
-            _c("div", { staticClass: "free-text" }, [
-              _vm._v("\n            Свободно\n        ")
-            ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "free-btn btn btn-success",
-                on: {
-                  click: function($event) {
-                    _vm.$parent.setDeskForAddingUser(_vm.position)
+        : _c(
+            "div",
+            {
+              class:
+                _vm.auth_user && _vm.auth_user.is_admin
+                  ? "show-add-btn-on-hover"
+                  : ""
+            },
+            [
+              _c("div", { staticClass: "free-text" }, [
+                _vm._v("\n            Свободно\n        ")
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "free-btn btn btn-success",
+                  on: {
+                    click: function($event) {
+                      _vm.$parent.setDeskForAddingUser(_vm.position)
+                    }
                   }
-                }
-              },
-              [_vm._v("+")]
-            )
-          ])
+                },
+                [_vm._v("+")]
+              )
+            ]
+          )
     ]
   )
 }

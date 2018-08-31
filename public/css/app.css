@@ -10513,11 +10513,11 @@ td {
   visibility: visible;
 }
 
-.desk:hover .free-btn {
+.desk:hover .show-add-btn-on-hover .free-btn {
   display: block;
 }
 
-.desk:hover .free-text {
+.desk:hover .show-add-btn-on-hover .free-text {
   display: none;
 }
 
