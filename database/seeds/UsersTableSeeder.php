@@ -58,6 +58,14 @@ class UsersTableSeeder extends Seeder
             'is_admin' => false,
         ], [
             'email' => null,
+            'name' => 'М. Саид',
+            'avatar' => '',
+            'position' => 8,
+            'payed' => false,
+            'password' => $password,
+            'is_admin' => false,
+        ], [
+            'email' => null,
             'name' => 'А. Берд',
             'avatar' => 'img/berd_aziev.jpg',
             'position' => 10,
