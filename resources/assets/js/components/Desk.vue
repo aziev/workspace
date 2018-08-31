@@ -9,6 +9,7 @@
                     'status-bar--waiting': !user.payed,
                  }"
                  @click="changePaymentStatus(!user.payed)">{{ user.name }}</div>
+            <button class="btn btn-danger action-button" @click="removeUserFromDesk(user.id)">X</button>
         </div>
         <div v-else>Свободно</div>
     </div>
@@ -26,7 +27,7 @@
             changePaymentStatus(status) {
                 if (this.auth_user && this.auth_user.is_admin) {
                     axios.put('api/users/' + this.user.id, {
-                        status: status,
+                        payed: status,
                     }).then(response => {
                         this.$emit('userPaymentStatusChanged', {
                             user_id: this.user.id,
@@ -35,6 +36,13 @@
                     });
                 }
             },
+            removeUserFromDesk(user_id) {
+                axios.put('api/users/' + this.user.id, {
+                    position: null,
+                }).then(response => {
+                    this.user.position = null;
+                });
+            }
         },
     }
 </script>

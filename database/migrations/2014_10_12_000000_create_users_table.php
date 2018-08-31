@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique()->nullable(); // todo
             $table->string('password');
             $table->string('avatar');
-            $table->integer('position');
+            $table->integer('position')->nullable();
             $table->boolean('payed')->default(false);
             $table->boolean('is_admin')->default(false);
             $table->rememberToken();

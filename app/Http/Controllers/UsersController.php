@@ -73,7 +73,7 @@ class UsersController extends Controller
 
         $this->authorize('update', $user);
 
-        $user->payed = $request['status'];
+        $user->fill($request->all());
         $result = $user->save();
 
         return response()->json($result);

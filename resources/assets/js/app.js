@@ -69,6 +69,13 @@ const app = new Vue({
                 });
             }
         },
+        isAdmin() {
+            if (!this.user) {
+                return false;
+            }
+
+            return this.user.is_admin;
+        },
     },
     router,
 });

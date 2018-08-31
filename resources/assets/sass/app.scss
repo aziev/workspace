@@ -33,6 +33,14 @@ td {
     position: relative;
     top: -12px;
   }
+  .action-button {
+    visibility: hidden;
+  }
+  &:hover {
+    .action-button {
+      visibility: visible;
+    }
+  }
 }
 
 .status-bar {
@@ -59,4 +67,12 @@ td {
   border-bottom: 1px solid #ebebeb;
   padding: 16px 0;
   margin-bottom: 50px;
+}
+
+.action-button {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  padding: 2px 6px;
+  line-height: 20px;
 }
