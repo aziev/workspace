@@ -12,13 +12,18 @@
             <button v-if="auth_user && auth_user.is_admin"
                     class="btn btn-danger action-button" @click="removeUserFromDesk(user.id)">X</button>
         </div>
-        <div v-else>Свободно</div>
+        <div v-else>
+            <div class="free-text">
+                Свободно
+            </div>
+            <button class="free-btn btn btn-success" @click="$parent.setDeskForAddingUser(position)">+</button>
+        </div>
     </div>
 </template>
 
 <script>
     export default {
-        props: ['user'],
+        props: ['user', 'position'],
         computed: {
             auth_user() {
                 return this.$root.user;

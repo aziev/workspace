@@ -10505,8 +10505,20 @@ td {
   visibility: hidden;
 }
 
+.desk .free-btn {
+  display: none;
+}
+
 .desk:hover .action-button {
   visibility: visible;
+}
+
+.desk:hover .free-btn {
+  display: block;
+}
+
+.desk:hover .free-text {
+  display: none;
 }
 
 .status-bar {
@@ -10550,7 +10562,13 @@ td {
   display: block;
   width: 50px;
   margin: 0 auto;
-  border: 3px solid #ebebeb;
+  border: 2px solid #aaa;
   border-radius: 50px;
+  -webkit-transition: border-color .2s;
+  transition: border-color .2s;
+}
+
+.unassigned-user.highlight img {
+  border-color: #3490dc;
 }
 

@@ -50055,9 +50055,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user'],
+    props: ['user', 'position'],
     computed: {
         auth_user: function auth_user() {
             return this.$root.user;
@@ -50147,7 +50152,24 @@ var render = function() {
                 )
               : _vm._e()
           ])
-        : _c("div", [_vm._v("Свободно")])
+        : _c("div", [
+            _c("div", { staticClass: "free-text" }, [
+              _vm._v("\n            Свободно\n        ")
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "free-btn btn btn-success",
+                on: {
+                  click: function($event) {
+                    _vm.$parent.setDeskForAddingUser(_vm.position)
+                  }
+                }
+              },
+              [_vm._v("+")]
+            )
+          ])
     ]
   )
 }
@@ -50242,12 +50264,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['auth_user'],
     data: function data() {
         return {
-            users: []
+            users: [],
+            desk_for_adding_user: null
         };
     },
 
@@ -50262,14 +50292,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return u.id === event.user_id;
             });
             user.payed = event.payed;
+        },
+        setDeskForAddingUser: function setDeskForAddingUser(position) {
+            this.desk_for_adding_user = position;
+        },
+        moveUserToDesk: function moveUserToDesk(user) {
+            var _this = this;
+
+            if (this.desk_for_adding_user) {
+                axios.put('api/users/' + user.id, {
+                    position: this.desk_for_adding_user
+                }).then(function (response) {
+                    user.position = _this.desk_for_adding_user;
+                    _this.desk_for_adding_user = null;
+                });
+            }
         }
     },
     created: function created() {
-        var _this = this;
+        var _this2 = this;
 
         if (!this.users.length) {
             axios.get('api/users').then(function (response) {
-                _this.users = response.data;
+                _this2.users = response.data;
             });
         }
     },
@@ -50314,7 +50359,11 @@ var render = function() {
                               row_index +
                                 3 * (cell_index - 1) +
                                 6 * (table_index - 1)
-                            )
+                            ),
+                            position:
+                              row_index +
+                              3 * (cell_index - 1) +
+                              6 * (table_index - 1)
                           },
                           on: { userPaymentStatusChanged: _vm.updateUser }
                         })
@@ -50337,18 +50386,54 @@ var render = function() {
               "div",
               { staticClass: "row justify-content-start" },
               _vm._l(_vm.unassigned_users, function(user) {
-                return _c("div", { staticClass: "unassigned-user mr-3" }, [
-                  _c("img", {
-                    attrs: {
-                      src: user.avatar ? user.avatar : "img/placeholder.jpg",
-                      alt: ""
+                return _c(
+                  "div",
+                  {
+                    staticClass: "unassigned-user mr-3",
+                    class: _vm.desk_for_adding_user ? "highlight" : "",
+                    on: {
+                      click: function($event) {
+                        _vm.moveUserToDesk(user)
+                      }
                     }
-                  }),
-                  _vm._v(" "),
-                  _c("span", [_vm._v(_vm._s(user.name))])
-                ])
+                  },
+                  [
+                    _c("img", {
+                      attrs: {
+                        src: user.avatar ? user.avatar : "img/placeholder.jpg",
+                        alt: ""
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(user.name))])
+                  ]
+                )
               })
-            )
+            ),
+            _vm._v(" "),
+            _vm.desk_for_adding_user
+              ? _c("div", { staticClass: "row" }, [
+                  _c("span", { staticClass: "text-secondary mr-2" }, [
+                    _vm._v(
+                      "Кликните на чувака, которого надо туда\n                посадить"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      attrs: { href: "" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.desk_for_adding_user = null
+                        }
+                      }
+                    },
+                    [_vm._v("Отмена")]
+                  )
+                ])
+              : _vm._e()
           ]
         : _vm._e()
     ],
