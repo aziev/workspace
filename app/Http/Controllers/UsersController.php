@@ -69,9 +69,12 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $result = User::whereId($id)->update([
-            'payed' => $request['status'],
-        ]);
+        $user = User::whereId($id)->firstOrFail();
+
+        $this->authorize('update', $user);
+
+        $user->payed = $request['status'];
+        $result = $user->save();
 
         return response()->json($result);
     }

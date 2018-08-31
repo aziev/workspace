@@ -19,7 +19,7 @@
         props: ['user'],
         computed: {
             auth_user() {
-                return this.$root._data.user;
+                return this.$root.user;
             }
         },
         methods: {

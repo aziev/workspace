@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
-    <div id="app" class="container">
-        <office :auth_user="user"></office>
+    <div id="app">
+        <router-view @logged-in="saveUserInfo"></router-view>
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>

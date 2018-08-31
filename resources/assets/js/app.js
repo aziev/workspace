@@ -9,6 +9,9 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -18,16 +21,43 @@ window.Vue = require('vue');
 Vue.component('desk', require('./components/Desk.vue'));
 Vue.component('office', require('./components/Office.vue'));
 
+import Main from './pages/Main.vue';
+import Login from './pages/Login.vue';
+
+const router = new VueRouter({
+    routes: [
+        {path: '/', component: Main},
+        {path: '/login', component: Login},
+    ]
+});
+
 const app = new Vue({
     el: '#app',
     data: {
         user: null,
     },
     created() {
-        if (!this.user) {
-            axios.get('user').then(response => {
-                this.user = response.data;
-            });
+        let api_token = localStorage.getItem('api_token');
+
+        console.log(api_token);
+
+        if (api_token) {
+            axios.defaults.headers.common['Authorization'] =
+                'Bearer ' + api_token;
+
+            if (!this.user) {
+                axios.post('api/auth/me').then(response => {
+                    this.user = response.data;
+                });
+            }
         }
     },
+    methods: {
+        saveUserInfo(event) {
+            console.log(event);
+            localStorage.setItem('api_token', event.token);
+            this.user = event.user;
+        }
+    },
+    router,
 });
