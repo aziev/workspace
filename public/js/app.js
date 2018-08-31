@@ -50058,14 +50058,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         changePaymentStatus: function changePaymentStatus(status) {
             var _this = this;
 
-            axios.put('api/users/' + this.user.id, {
-                status: status
-            }).then(function (response) {
-                _this.$emit('userPaymentStatusChanged', {
-                    user_id: _this.user.id,
-                    payed: status
+            if (this.auth_user && this.auth_user.is_admin) {
+                axios.put('api/users/' + this.user.id, {
+                    status: status
+                }).then(function (response) {
+                    _this.$emit('userPaymentStatusChanged', {
+                        user_id: _this.user.id,
+                        payed: status
+                    });
                 });
-            });
+            }
         }
     }
 });

@@ -24,14 +24,16 @@
         },
         methods: {
             changePaymentStatus(status) {
-                axios.put('api/users/' + this.user.id, {
-                    status: status,
-                }).then(response => {
-                    this.$emit('userPaymentStatusChanged', {
-                        user_id: this.user.id,
-                        payed: status,
+                if (this.auth_user && this.auth_user.is_admin) {
+                    axios.put('api/users/' + this.user.id, {
+                        status: status,
+                    }).then(response => {
+                        this.$emit('userPaymentStatusChanged', {
+                            user_id: this.user.id,
+                            payed: status,
+                        });
                     });
-                });
+                }
             },
         },
     }
