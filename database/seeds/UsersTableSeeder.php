@@ -35,7 +35,7 @@ class UsersTableSeeder extends Seeder
         ], [
             'email' => null,
             'name' => 'А. Хаваж',
-            'avatar' => 'img/khavazh_archakov.jpg',
+            'avatar' => '',
             'position' => 3,
             'payed' => true,
             'password' => $password,
